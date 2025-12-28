@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { categories, listings } from '../constants/index';
+import { categories } from '../constants/index'; // Kept for the icon navigation
 import PropertyCard from '../components/propertyCard';
 import Footer from '../components/footer';
+import Pill from '@/components/common/Pill';
+import { HERO_IMAGE, FILTER_LABELS, PROPERTYLISTINGSAMPLE } from '@/constants';
 
 const App: React.FC = () => {
     const [activeCategory, setActiveCategory] = useState('Villa');
     const [activeFilter, setActiveFilter] = useState('All');
-
-    const filters = ['All', 'Top Villa', 'Free Reschedule', 'Book Now, Pay later', 'Self Checkin', 'Instant Book'];
 
     return (
         <div className="min-h-screen flex flex-col font-sans">
@@ -67,26 +67,32 @@ const App: React.FC = () => {
             </header>
 
             <main className="flex-grow">
+                {/* Hero Section using HERO_IMAGE from constants */}
                 <div className="relative h-96 md:h-[500px] flex items-center justify-center text-white">
-                    <img src="https://picsum.photos/seed/hero/1600/600" alt="Mountain landscape" className="absolute inset-0 w-full h-full object-cover"/>
-                    <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+                    <img 
+                        src={HERO_IMAGE} 
+                        alt="Hero Background" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                     <div className="relative text-center px-4">
                         <h1 className="text-4xl md:text-6xl font-bold">Find your favorite</h1>
                         <h1 className="text-4xl md:text-6xl font-bold mt-2">place here!</h1>
-                        <p className="mt-4 text-lg">The best prices for over 2 million properties worldwide</p>
+                        <p className="mt-4 text-lg md:text-xl">The best prices for over 2 million properties worldwide.</p>
                     </div>
                 </div>
 
                 <div className="container mx-auto px-4 md:px-8 py-6">
+                     {/* Filter Section using Pill component and FILTER_LABELS */}
                      <div className="flex flex-wrap items-center gap-2 md:gap-4 my-4">
-                        {filters.map(filter => (
-                            <button 
-                                key={filter}
+                        {FILTER_LABELS.map(filter => (
+                            <Pill 
+                                key={filter} 
+                                label={filter} 
                                 onClick={() => setActiveFilter(filter)}
-                                className={`px-4 py-2 text-sm font-medium border rounded-full transition-colors ${activeFilter === filter ? 'bg-teal-600 text-white border-teal-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'}`}
-                            >
-                                {filter}
-                            </button>
+                                // Optional: You could update the Pill component to accept an 'active' prop
+                                // for styling, or keep it simple as requested.
+                            />
                         ))}
                         <div className="flex-grow"></div>
                         <div className="flex items-center space-x-4">
@@ -100,8 +106,9 @@ const App: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-4">
-                        {listings.map(listing => (
+                    {/* Listing Section using PROPERTYLISTINGSAMPLE */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 mt-8">
+                        {PROPERTYLISTINGSAMPLE.map(listing => (
                             <PropertyCard key={listing.id} listing={listing} />
                         ))}
                     </div>

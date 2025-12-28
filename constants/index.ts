@@ -79,6 +79,11 @@ export interface PropertyProps {
   discount: string;
 }
 
+export const HERO_IMAGE = "/images/hero-bg.jpg"; // Ensure this exists in public/images/
+
+export const FILTER_LABELS = [
+  "Top Villa", "Self Checkin", "Luxury", "Pet Friendly", "Beachfront", "Mountain View"
+];
 
 export const PROPERTYLISTINGSAMPLE: PropertyProps []  =  [
   {
